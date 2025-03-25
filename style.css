@@ -1,4 +1,4 @@
-/* style.css */
+/* Updated style.css with white menu and project links */
 
 body {
   margin: 0;
@@ -52,12 +52,13 @@ header {
 
 .menu li a {
   text-decoration: none;
-  color: #66ccff;
+  color: #ffffff;
   font-weight: bold;
 }
 
 .menu li a:hover {
   text-decoration: underline;
+  color: #66ccff;
 }
 
 main {
@@ -147,12 +148,12 @@ footer {
 }
 
 .project-links a {
-  color: #66ccff;
+  color: #ffffff;
   text-decoration: none;
   font-weight: bold;
 }
 
 .project-links a:hover {
   text-decoration: underline;
-  color: #ffffff;
+  color: #66ccff;
 }
