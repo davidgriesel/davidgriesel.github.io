@@ -122,3 +122,11 @@ footer {
 .project-links a:hover {
   text-decoration: underline;
 }
+
+.project-thumb {
+  width: auto;
+  height: 80px;
+  border-radius: 6px;
+  object-fit: contain;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
