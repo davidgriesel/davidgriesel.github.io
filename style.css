@@ -98,3 +98,27 @@ footer {
 .footer-links a:hover {
   text-decoration: underline;
 }
+
+.project-item {
+  margin-bottom: 1.5em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.project-thumb {
+  width: 100px;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.project-links a {
+  color: #007acc;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.project-links a:hover {
+  text-decoration: underline;
+}
