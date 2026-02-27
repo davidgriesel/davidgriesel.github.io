@@ -6,7 +6,7 @@
     - SQL
     - Power BI
     - ETL
-  image: /assets/images/project-job-market.svg
+  image: /assets/images/job-market-analysis-thumb.png
   links:
     detail: /projects/job-market-analysis/
     repository: https://github.com/davidgriesel/job_market_analysis
@@ -19,7 +19,7 @@
     - Power Query
     - DAX
     - Dashboarding
-  image: /assets/images/project-job-market.svg
+  image: /assets/images/job-market-dashboard-thumb.png
   links:
     detail: /projects/job-market-dashboard/
     repository: https://github.com/davidgriesel/job_listing_dashboard
@@ -42,7 +42,7 @@
     - Tableau
     - Excel
     - Forecasting
-  image: /assets/images/project-forecast.svg
+  image: /assets/images/flu-risk-forecasting-thumb.png
   links:
     detail: /projects/flu-risk-forecasting-analysis/
     repository: https://github.com/davidgriesel/02_flu_risk_forecasting
