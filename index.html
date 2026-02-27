@@ -1,53 +1,84 @@
-<!-- index.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>David Griesel | Data Analyst</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header>
-    <div class="header-content">
-      <img src="images/profile.jpg" alt="David Griesel" class="profile-pic" />
-      <h1>David Griesel</h1>
-      <p class="subtitle">Data Analyst</p>
-    </div>
-    <nav>
-      <ul class="menu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About Me</a></li>
-        <li><a href="portfolio.html">Portfolio</a></li>
-        <li><a href="bi.html">BI Portfolio</a></li>
-        <li><a href="resume.html">Resume</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="contact.html">Contact Me</a></li>
-      </ul>
-    </nav>
-  </header>
+---
+layout: default
+title: Home
+description: Data analyst portfolio with projects, skills, and contact details.
+---
 
-  <main>
-    <section class="about-blurb">
-      <p>
-        Hello, my name is David, and welcome to my website.
-      </p>
-      <p>
-        I’m a data analyst based in Hamburg, Germany and I enjoy working with complex datasets — identifying patterns, exploring smarter ways of working, and solving real-world challenges. 
-      </p>
-      <p>
-        This site is where I share a few of my projects, each one reflecting the tools and skills I’ve developed along the way, and the progress I’m making as I continue to grow in this field.
-      </p>
-    </section>
-  </main>
-
-  <footer>
-    <div class="footer-links">
-      <a href="https://www.linkedin.com/in/davidgriesel/" target="_blank">LinkedIn</a>
-      <a href="https://public.tableau.com/app/profile/davidgriesel" target="_blank">Tableau</a>
-      <a href="https://github.com/davidgriesel" target="_blank">GitHub</a>
+<section class="hero" aria-label="Introduction banner">
+  <div class="container">
+    <h1>Data Analyst Portfolio</h1>
+    <p>I turn untidy datasets into clear, decision-ready insight with focussed analysis and practical storytelling.</p>
+    <div class="cta-row">
+      <a class="button button-primary" href="{{ '/projects/' | relative_url }}">View Projects</a>
+      <a class="button button-secondary" href="{{ '/resume/' | relative_url }}">Open Resume</a>
     </div>
-    <p>&copy; 2025 David Griesel</p>
-  </footer>
-</body>
-</html>
+  </div>
+</section>
+
+<section id="about" class="section-band band-about">
+  <div class="container">
+    <h2 class="section-heading">About</h2>
+    <p class="section-lead">I support teams with analysis that is methodical, transparent, and useful for day-to-day decisions. My work blends SQL, Python, and BI tooling to improve planning, reporting, and operational clarity across the organisation.</p>
+  </div>
+</section>
+
+<section id="projects" class="section-band band-projects">
+  <div class="container">
+    <h2 class="section-heading">Recent Projects</h2>
+    <p class="section-lead">A quick sample of recent delivery. Visit the full projects page for complete notes and links.</p>
+    <div class="grid cards-3">
+      {% for project in site.data.projects limit:3 %}
+        <article class="card">
+          <img src="{{ project.image | default: site.project_defaults_image | relative_url }}" alt="Preview image for {{ project.title }}">
+          <div class="card-content">
+            <h3>{{ project.title }}</h3>
+            <p>{{ project.description }}</p>
+            <div class="tag-list" aria-label="Project tags">
+              {% for tag in project.tags %}
+                <span class="tag">{{ tag }}</span>
+              {% endfor %}
+            </div>
+            <div class="inline-links">
+              <a href="{{ project.links.detail | relative_url }}">Read Case Study</a>
+              <a href="{{ project.links.repository }}">Source Code</a>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="section-band band-skills">
+  <div class="container">
+    <h2 class="section-heading">Skills</h2>
+    <p class="section-lead">Core capabilities across data wrangling, modelling, visualisation, and communication.</p>
+    <div class="skill-list">
+      <article class="skill-panel">
+        <h3>Data Preparation</h3>
+        <p>SQL, Power Query, and Python workflows for reliable, auditable datasets.</p>
+      </article>
+      <article class="skill-panel">
+        <h3>Analysis</h3>
+        <p>Exploratory analysis, cohort trends, and root-cause work to support prioritisation.</p>
+      </article>
+      <article class="skill-panel">
+        <h3>Visualisation</h3>
+        <p>Power BI and clear narrative design that keeps insight understandable for mixed audiences.</p>
+      </article>
+      <article class="skill-panel">
+        <h3>Delivery</h3>
+        <p>Documented assumptions, reproducible methods, and concise recommendation notes.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section-band band-contact">
+  <div class="container">
+    <h2 class="section-heading">Contact</h2>
+    <p class="section-lead">If you would like to discuss projects, contract work, or collaboration, please get in touch.</p>
+    <p><strong>Email:</strong> <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+    <p><strong>LinkedIn:</strong> <a href="{{ site.linkedin_url }}">{{ site.linkedin_url }}</a></p>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+- title: Job Market Dashboard
+  slug: job-market-dashboard
+  description: Interactive labour market analysis focussed on salary bands, hiring trends, and location shifts.
+  tags:
+    - Power BI
+    - DAX
+    - Data Modelling
+  image: /assets/images/project-job-market.svg
+  links:
+    detail: /projects/job-market-dashboard/
+    repository: https://github.com/your-github-username/job-market-dashboard
+
+- title: Customer Churn Cohort Study
+  slug: customer-churn-cohort-study
+  description: Cohort retention analysis to identify churn signals and improve customer lifetime value.
+  tags:
+    - SQL
+    - Python
+    - Cohort Analysis
+  image: /assets/images/project-churn.svg
+  links:
+    detail: /projects/customer-churn-cohort-study/
+    repository: https://github.com/your-github-username/customer-churn-cohort-study
+
+- title: Retail Forecasting Notebook
+  slug: retail-forecasting-notebook
+  description: Time-series forecasting of weekly retail demand with clear error tracking and scenario planning.
+  tags:
+    - Forecasting
+    - Pandas
+    - Visualisation
+  image: /assets/images/project-forecast.svg
+  links:
+    detail: /projects/retail-forecasting-notebook/
+    repository: https://github.com/your-github-username/retail-forecasting-notebook
+
+- title: Campaign Performance Tracker
+  slug: campaign-performance-tracker
+  description: Marketing funnel dashboard linking campaign spend to conversion quality and channel return.
+  tags:
+    - Excel
+    - Power Query
+    - Dashboarding
+  image: /assets/images/project-campaign.svg
+  links:
+    detail: /projects/campaign-performance-tracker/
+    repository: https://github.com/your-github-username/campaign-performance-tracker

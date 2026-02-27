@@ -1,0 +1,18 @@
+title: David Griesel | Data Analyst Portfolio
+description: Portfolio site showing data analysis projects, tools, and professional experience.
+url: "https://your-github-username.github.io"
+baseurl: ""
+email: "your.email@example.com"
+linkedin_url: "https://www.linkedin.com/in/your-linkedin-handle"
+github_username: "your-github-username"
+hero_image: "/assets/images/hero-data.svg"
+project_defaults_image: "/assets/images/project-card-default.svg"
+markdown: kramdown
+permalink: pretty
+
+collections: []
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
