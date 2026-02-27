@@ -8,6 +8,7 @@
     - ETL
   image: /assets/images/project-job-market.svg
   links:
+    detail: /projects/job-market-analysis/
     repository: https://github.com/davidgriesel/job_market_analysis
 
 - title: Job Market Dashboard
@@ -43,6 +44,7 @@
     - Forecasting
   image: /assets/images/project-forecast.svg
   links:
+    detail: /projects/flu-risk-forecasting-analysis/
     repository: https://github.com/davidgriesel/02_flu_risk_forecasting
 
 - title: Relational Database Analysis
