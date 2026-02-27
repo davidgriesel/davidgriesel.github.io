@@ -1,0 +1,64 @@
+<!-- contact.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | David Griesel</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>Contact Me</h1>
+    </div>
+    <nav>
+      <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="bi.html">BI Portfolio</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact Me</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="contact-content">
+      <p>If you'd like to get in touch, feel free to drop me a message using the form below or connect with me on LinkedIn.</p>
+
+      <!-- For static hosting services you can hook this up to a form-handling service such as
+           Formspree, Netlify Forms, or your own backend. Replace the `action` attribute with the
+           appropriate URL or remove entirely if you just want to show the form without functionality. -->
+      <form action="#" method="POST">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit" class="button">Send Message</button>
+      </form>
+
+      <ul>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/davidgriesel/" target="_blank">/in/davidgriesel</a></li>
+        <li>GitHub: <a href="https://github.com/davidgriesel" target="_blank">@davidgriesel</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/davidgriesel/" target="_blank">LinkedIn</a>
+      <a href="https://public.tableau.com/app/profile/davidgriesel" target="_blank">Tableau</a>
+      <a href="https://github.com/davidgriesel" target="_blank">GitHub</a>
+    </div>
+    <p>&copy; 2025 David Griesel</p>
+  </footer>
+</body>
+</html>

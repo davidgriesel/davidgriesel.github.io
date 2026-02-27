@@ -147,6 +147,17 @@ footer {
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
 }
 
+/* BI embed container */
+.bi-embed {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+}
+.bi-embed iframe {
+  max-width: 100%;
+  height: auto;
+}
+
 .project-links a {
   color: #ffffff;
   text-decoration: none;
