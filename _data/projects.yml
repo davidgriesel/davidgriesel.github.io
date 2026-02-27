@@ -1,47 +1,99 @@
+- title: Job Market Analysis
+  slug: job-market-analysis
+  description: End-to-end labour market pipeline from ingestion and ETL through SQL star-schema modelling and BI reporting.
+  tags:
+    - Python
+    - SQL
+    - Power BI
+    - ETL
+  image: /assets/images/project-job-market.svg
+  links:
+    repository: https://github.com/davidgriesel/job_market_analysis
+
 - title: Job Market Dashboard
   slug: job-market-dashboard
-  description: Interactive labour market analysis focussed on salary bands, hiring trends, and location shifts.
+  description: Interactive Power BI dashboard for salary trends, skills demand, and market movement.
   tags:
     - Power BI
+    - Power Query
     - DAX
-    - Data Modelling
+    - Dashboarding
   image: /assets/images/project-job-market.svg
   links:
     detail: /projects/job-market-dashboard/
-    repository: https://github.com/your-github-username/job-market-dashboard
+    repository: https://github.com/davidgriesel/job_listing_dashboard
 
-- title: Customer Churn Cohort Study
-  slug: customer-churn-cohort-study
-  description: Cohort retention analysis to identify churn signals and improve customer lifetime value.
-  tags:
-    - SQL
-    - Python
-    - Cohort Analysis
-  image: /assets/images/project-churn.svg
-  links:
-    detail: /projects/customer-churn-cohort-study/
-    repository: https://github.com/your-github-username/customer-churn-cohort-study
-
-- title: Retail Forecasting Notebook
-  slug: retail-forecasting-notebook
-  description: Time-series forecasting of weekly retail demand with clear error tracking and scenario planning.
-  tags:
-    - Forecasting
-    - Pandas
-    - Visualisation
-  image: /assets/images/project-forecast.svg
-  links:
-    detail: /projects/retail-forecasting-notebook/
-    repository: https://github.com/your-github-username/retail-forecasting-notebook
-
-- title: Campaign Performance Tracker
-  slug: campaign-performance-tracker
-  description: Marketing funnel dashboard linking campaign spend to conversion quality and channel return.
+- title: Video Game Market Analysis
+  slug: video-game-market-analysis
+  description: Regional trend and genre analysis testing board-level assumptions on market share stability.
   tags:
     - Excel
-    - Power Query
-    - Dashboarding
+    - Visualisation
+    - Trend Analysis
   image: /assets/images/project-campaign.svg
   links:
-    detail: /projects/campaign-performance-tracker/
-    repository: https://github.com/your-github-username/campaign-performance-tracker
+    repository: https://github.com/davidgriesel/01_video_game_market_analysis
+
+- title: Flu Risk Forecasting Analysis
+  slug: flu-risk-forecasting-analysis
+  description: State-level risk profiling and seasonal forecasting to support healthcare staffing planning.
+  tags:
+    - Tableau
+    - Excel
+    - Forecasting
+  image: /assets/images/project-forecast.svg
+  links:
+    repository: https://github.com/davidgriesel/02_flu_risk_forecasting
+
+- title: Relational Database Analysis
+  slug: relational-database-analysis
+  description: SQL-first relational analysis of streaming service behaviour, retention, and revenue performance.
+  tags:
+    - PostgreSQL
+    - SQL
+    - Tableau
+  image: /assets/images/project-card-default.svg
+  links:
+    repository: https://github.com/davidgriesel/03_streaming_service_database_queries
+
+- title: Customer Segmentation Analysis
+  slug: customer-segmentation-analysis
+  description: Behavioural and demographic segmentation using Python to guide targeted marketing decisions.
+  tags:
+    - Python
+    - pandas
+    - seaborn
+    - Segmentation
+  image: /assets/images/project-churn.svg
+  links:
+    repository: https://github.com/davidgriesel/04_customer_segmentation_behavioural_analysis
+
+- title: Applied Analytics
+  slug: applied-analytics
+  description: Applied analytics project repository from CareerFoundry training.
+  tags:
+    - Applied Analytics
+    - Portfolio Project
+  image: /assets/images/project-card-default.svg
+  links:
+    repository: https://github.com/davidgriesel/05_applied_analytics
+
+- title: Coffee Quality Prediction Analysis
+  slug: coffee-quality-prediction-analysis
+  description: Machine learning and geospatial analysis of sensory metrics for coffee quality modelling.
+  tags:
+    - scikit-learn
+    - statsmodels
+    - folium
+    - Time Series
+  image: /assets/images/project-forecast.svg
+  links:
+    repository: https://github.com/davidgriesel/06_coffee_quality_modelling
+
+- title: Coming Soon
+  slug: coming-soon
+  description: Placeholder for the next project currently in planning.
+  tags:
+    - Placeholder
+  image: /assets/images/project-card-default.svg
+  links: {}

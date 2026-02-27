@@ -21,10 +21,16 @@ description: Data projects spanning dashboards, forecasting, and cohort analysis
                 <span class="tag">{{ tag }}</span>
               {% endfor %}
             </div>
-            <div class="inline-links">
-              <a href="{{ project.links.detail | relative_url }}">Project Page</a>
-              <a href="{{ project.links.repository }}">Repository</a>
-            </div>
+            {% if project.links.detail or project.links.repository %}
+              <div class="inline-links">
+                {% if project.links.detail %}
+                  <a href="{% if project.links.detail contains '://' %}{{ project.links.detail }}{% else %}{{ project.links.detail | relative_url }}{% endif %}">Project Page</a>
+                {% endif %}
+                {% if project.links.repository %}
+                  <a href="{{ project.links.repository }}">Repository</a>
+                {% endif %}
+              </div>
+            {% endif %}
           </div>
         </article>
       {% endfor %}

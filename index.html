@@ -38,10 +38,16 @@ description: Data analyst portfolio with projects, skills, and contact details.
                 <span class="tag">{{ tag }}</span>
               {% endfor %}
             </div>
-            <div class="inline-links">
-              <a href="{{ project.links.detail | relative_url }}">Read Case Study</a>
-              <a href="{{ project.links.repository }}">Source Code</a>
-            </div>
+            {% if project.links.detail or project.links.repository %}
+              <div class="inline-links">
+                {% if project.links.detail %}
+                  <a href="{% if project.links.detail contains '://' %}{{ project.links.detail }}{% else %}{{ project.links.detail | relative_url }}{% endif %}">Read Project</a>
+                {% endif %}
+                {% if project.links.repository %}
+                  <a href="{{ project.links.repository }}">Source Code</a>
+                {% endif %}
+              </div>
+            {% endif %}
           </div>
         </article>
       {% endfor %}
@@ -52,23 +58,23 @@ description: Data analyst portfolio with projects, skills, and contact details.
 <section id="skills" class="section-band band-skills">
   <div class="container">
     <h2 class="section-heading">Skills</h2>
-    <p class="section-lead">Core capabilities across data wrangling, modelling, visualisation, and communication.</p>
+    <p class="section-lead">Core capabilities validated across portfolio projects and documented repository workflows.</p>
     <div class="skill-list">
       <article class="skill-panel">
-        <h3>Data Preparation</h3>
-        <p>SQL, Power Query, and Python workflows for reliable, auditable datasets.</p>
+        <h3>Data Engineering Workflow</h3>
+        <p>Ingestion, ETL design, and data validation using Python, pandas, and structured project pipelines.</p>
       </article>
       <article class="skill-panel">
-        <h3>Analysis</h3>
-        <p>Exploratory analysis, cohort trends, and root-cause work to support prioritisation.</p>
+        <h3>SQL and Data Modelling</h3>
+        <p>Relational querying, PostgreSQL analysis, and star-schema modelling for analysis-ready datasets.</p>
       </article>
       <article class="skill-panel">
-        <h3>Visualisation</h3>
-        <p>Power BI and clear narrative design that keeps insight understandable for mixed audiences.</p>
+        <h3>Dashboards and Visualisation</h3>
+        <p>Power BI, Tableau, and Python visual libraries for interactive reporting and stakeholder storytelling.</p>
       </article>
       <article class="skill-panel">
-        <h3>Delivery</h3>
-        <p>Documented assumptions, reproducible methods, and concise recommendation notes.</p>
+        <h3>Statistical and ML Methods</h3>
+        <p>Forecasting, regression, clustering, and time-series analysis with scikit-learn and statsmodels.</p>
       </article>
     </div>
   </div>
