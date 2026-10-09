@@ -1,0 +1,11 @@
+# Allowed skill names. The build fails if an entry uses a name that is not here.
+# Names are matched exactly.
+- Dashboard design
+- Data cleaning
+- Data modelling
+- Data validation
+- Exploratory analysis
+- Forecasting
+- Machine learning
+- Segmentation
+- Statistical analysis

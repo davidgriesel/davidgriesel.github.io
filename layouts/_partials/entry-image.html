@@ -1,0 +1,9 @@
+{{/* Arguments: page, width (for example "640x"), and alt (true to describe the image, false when the image is decorative). */}}
+{{ $p := .page }}
+{{ with index ($p.Params.images | default (slice)) 0 }}
+  {{ $item := . }}
+  {{ with $p.Resources.GetMatch $item.file }}
+    {{ $img := .Resize (printf "%s webp q80" $.width) }}
+    <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ if $.alt }}{{ $item.alt }}{{ end }}" loading="lazy">
+  {{ end }}
+{{ end }}

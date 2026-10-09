@@ -1,0 +1,12 @@
+{{/* A production build stops while any unfinished marker is left in a page or in the legal notice details. */}}
+{{ if and .Params.sample (not site.Params.allowSamples) }}{{ errorf "Sample content is still present (%q) and allowSamples is false. Remove the sample projects and case studies before launch." .File.Path }}{{ end }}
+{{ if hugo.IsProduction }}
+  {{ if or (strings.Contains .RawContent "[TO WRITE") (strings.Contains .RawContent "[ENTER") }}
+    {{ errorf "Page %q still holds an unfinished marker ([TO WRITE or [ENTER). Finish it before a production build." .File.Path }}
+  {{ end }}
+  {{ range $k, $v := partial "provider.html" . }}
+    {{ if strings.HasPrefix (printf "%v" $v) "ENTER" }}
+      {{ errorf "The legal notice detail %q is still a placeholder (content/legal-notice.md). Fill it in before a production build." $k }}
+    {{ end }}
+  {{ end }}
+{{ end }}

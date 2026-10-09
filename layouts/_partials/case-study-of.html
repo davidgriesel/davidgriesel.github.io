@@ -1,0 +1,2 @@
+{{/* Returns the case studies that belong to an entry (matched on the entry's folder name). */}}
+{{ return (where (where site.RegularPages "Section" "case-studies") "Params.project" .File.ContentBaseName) }}

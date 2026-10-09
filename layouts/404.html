@@ -1,0 +1,7 @@
+{{ define "main" }}
+<div class="wrap prose">
+  <h1>{{ i18n "pageNotFound" }}</h1>
+  <p>{{ i18n "pageNotFoundText" }}</p>
+  <p><a href="{{ "/" | relLangURL }}">{{ site.Title }}</a> · <a href="{{ "/projects/" | relLangURL }}">{{ i18n "navProjects" }}</a></p>
+</div>
+{{ end }}

@@ -1,0 +1,16 @@
+{{ $p := . }}
+{{ partial "validate-entry.html" $p }}
+{{ $acc := $p.Params.accent | default "ink" }}
+<article class="card accent-{{ $acc }}" data-card data-tools="{{ delimit ($p.Params.tools | default (slice)) "|" }}" data-skills="{{ delimit ($p.Params.skills | default (slice)) "|" }}">
+  {{ $img := partial "entry-image.html" (dict "page" $p "width" "640x" "alt" false) }}
+  {{ with $img }}<a class="card-image" href="{{ $p.RelPermalink }}" tabindex="-1" aria-hidden="true">{{ . }}</a>{{ end }}
+  <div class="card-body">
+    {{ with $p.Params.topic }}<p class="label">{{ . }}</p>{{ end }}
+    {{ if $p.Params.sample }}<p class="badge sample">{{ i18n "sample" }}</p>{{ end }}
+    <h3><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h3>
+    {{ if gt (len (partial "case-study-of.html" $p)) 0 }}<p class="badge">{{ i18n "caseStudy" }}</p>{{ end }}
+    <p class="hook">{{ $p.Params.hook }}</p>
+    {{ partial "entry-tags.html" $p }}
+  </div>
+  <div class="card-foot">{{ partial "entry-links.html" $p }}</div>
+</article>

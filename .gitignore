@@ -1,0 +1,31 @@
+# Minimal .gitignore: keeps secrets, data and junk out of LOCAL history.
+# Nothing is pushed, but history reaches the OneDrive backup as git bundles,
+# and data kept out of history can still be deleted later.
+
+# Secrets: live in the password manager, never in git
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Hugo's data/ folder holds the allowed tool and skill names, which are site settings,
+# so it is not ignored here. No real data goes in it.
+
+# OS / editor junk
+.DS_Store
+.vscode/
+.idea/
+
+# Rebuildable environments
+.venv/
+venv/
+__pycache__/
+node_modules/
+.ipynb_checkpoints/
+
+# Hugo
+/public/
+/resources/_gen/
+.hugo_build.lock

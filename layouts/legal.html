@@ -1,0 +1,14 @@
+{{ define "main" }}
+{{ $prov := partial "provider.html" . }}
+<div class="wrap prose notice page-body">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+  <dl class="provider">
+    <dt>{{ i18n "providerName" }}</dt><dd>{{ partial "encode.html" $prov.name }}</dd>
+    <dt>{{ i18n "providerAddress" }}</dt>
+    <dd>{{ partial "encode.html" $prov.street }}<br>{{ partial "encode.html" $prov.postcode }} {{ partial "encode.html" $prov.city }}<br>{{ partial "encode.html" $prov.country }}</dd>
+    <dt>{{ i18n "providerEmail" }}</dt><dd>{{ with $prov.email }}<a {{ printf "href=\"mailto:%s\"" (partial "encode.html" .) | safeHTMLAttr }}>{{ partial "encode.html" . }}</a>{{ end }}</dd>
+    <dt>{{ i18n "providerPhone" }}</dt><dd>{{ with $prov.phone }}<a {{ printf "href=\"tel:%s\"" (partial "encode.html" (replaceRE `[^+0-9]` "" .)) | safeHTMLAttr }}>{{ partial "encode.html" . }}</a>{{ end }}</dd>
+  </dl>
+</div>
+{{ end }}

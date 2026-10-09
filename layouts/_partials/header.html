@@ -1,0 +1,29 @@
+{{ $page := . }}
+{{ $items := slice
+  (dict "url" "/projects/" "label" (i18n "navProjects") "sections" (slice "projects"))
+  (dict "url" "/case-studies/" "label" (i18n "navCaseStudies") "sections" (slice "case-studies")) }}
+{{ if site.Params.showToolsAndSkills }}
+  {{ $items = $items | append (dict "url" "/tools-and-skills/" "label" (i18n "navToolsSkills") "sections" (slice "tools" "skills")) }}
+{{ end }}
+{{ $items = $items | append (dict "url" "/about/" "label" (i18n "navAbout") "sections" (slice "about")) }}
+<header class="masthead">
+  <div class="wrap bar">
+    <div class="brand-block">
+      <a class="brand" href="{{ "/" | relLangURL }}">{{ site.Title }}</a>
+      <p class="tagline">{{ i18n "tagline" }}</p>
+    </div>
+    <div class="header-right">
+      <nav aria-label="{{ i18n "mainNavigation" }}">
+        <ul>
+          {{ range $items }}
+            {{ $url := .url | relLangURL }}
+            {{ $current := "" }}
+            {{ if eq $page.RelPermalink $url }}{{ $current = "page" }}{{ else if in .sections $page.Section }}{{ $current = "true" }}{{ end }}
+            <li><a href="{{ $url }}"{{ with $current }} aria-current="{{ . }}"{{ end }}>{{ .label }}</a></li>
+          {{ end }}
+        </ul>
+      </nav>
+      {{ partial "profiles.html" (dict "class" "profiles header-links" "label" "findMe") }}
+    </div>
+  </div>
+</header>

@@ -1,0 +1,15 @@
+{{ $cs := . }}
+{{ $entry := index (where (where site.RegularPages "Section" "projects") "File.ContentBaseName" $cs.Params.project) 0 }}
+{{ $acc := "ink" }}{{ with $entry }}{{ $acc = .Params.accent | default "ink" }}{{ end }}
+<article class="card accent-{{ $acc }}" data-card data-tools="{{ delimit ($entry.Params.tools | default (slice)) "|" }}" data-skills="{{ delimit ($entry.Params.skills | default (slice)) "|" }}">
+  {{ $img := partial "entry-image.html" (dict "page" $cs "width" "640x" "alt" false) }}
+  {{ with $img }}<a class="card-image" href="{{ $cs.RelPermalink }}" tabindex="-1" aria-hidden="true">{{ . }}</a>{{ end }}
+  <div class="card-body">
+    <p class="label">{{ i18n "caseStudy" }}</p>
+    {{ if $cs.Params.sample }}<p class="badge sample">{{ i18n "sample" }}</p>{{ end }}
+    <h3><a href="{{ $cs.RelPermalink }}">{{ $cs.Title }}</a></h3>
+    <p class="hook">{{ $cs.Params.hook }}</p>
+    {{ with $entry }}{{ partial "case-tags.html" . }}{{ end }}
+  </div>
+  <div class="card-foot"><a class="button" href="{{ $cs.RelPermalink }}">{{ i18n "readCaseStudy" }}</a></div>
+</article>

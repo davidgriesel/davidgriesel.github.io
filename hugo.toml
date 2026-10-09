@@ -1,0 +1,45 @@
+baseURL = 'https://davidgriesel.github.io/'
+title = 'David Griesel'
+defaultContentLanguage = 'en'
+defaultContentLanguageInSubdir = false
+disableKinds = ['rss']
+enableRobotsTXT = true
+
+# Entries are grouped two ways. The names allowed in each are in data/allowed/.
+[taxonomies]
+  tool = 'tools'
+  skill = 'skills'
+
+[languages]
+  [languages.en]
+    locale = 'en'
+    label = 'English'
+    weight = 1
+    title = 'David Griesel'
+    [languages.en.params]
+      description = 'Data analyst portfolio: projects by tool and skill.'
+
+[params]
+  # Sample projects and case studies (front matter: sample: true) are labelled and kept out of search
+  # engines. Set this to false at launch: the build then stops while any sample content remains.
+  allowSamples = true
+  # One switch for the tools and skills features: the "Tools & Skills" link and page, the
+  # /tools/ and /skills/ index pages, and the filters on the Projects and Case studies lists.
+  # When off, those pages send a visitor to Projects, the filters are not shown, and only the
+  # chips remain: on projects they link to the page for that tag, on case studies they are plain labels.
+  showToolsAndSkills = false
+  [params.profiles]
+    linkedin = 'https://www.linkedin.com/in/davidgriesel'
+    tableau = 'https://public.tableau.com/app/profile/david.griesel/vizzes'
+    github = 'https://github.com/davidgriesel'
+
+[markup.goldmark.renderer]
+  unsafe = false
+
+[markup.tableOfContents]
+  startLevel = 2
+  endLevel = 3
+
+# The HTML minifier turns numeric entities back into plain characters, which would undo
+# the encoding of the legal notice details, so the HTML is not minified. CSS and script
+# are minified where they are processed.

@@ -1,0 +1,10 @@
+{{ $links := .Params.links | default dict }}
+{{ if $links }}
+<ul class="links">
+  {{ with $links.github }}<li><a class="button" href="{{ . }}" rel="noopener">{{ i18n "linkGithub" }}</a></li>{{ end }}
+  {{ with $links.tableau }}<li><a class="button" href="{{ . }}" rel="noopener">{{ i18n "linkTableau" }}</a></li>{{ end }}
+  {{ with $links.powerbi }}<li><a class="button" href="{{ . }}" rel="noopener">{{ i18n "linkPowerbi" }}</a></li>{{ end }}
+  {{ with $links.demo }}<li><a class="button" href="{{ . }}" rel="noopener">{{ i18n "linkDemo" }}</a></li>{{ end }}
+</ul>
+{{ if $links.demo }}<p class="note">{{ i18n "demoNote" }}</p>{{ end }}
+{{ end }}

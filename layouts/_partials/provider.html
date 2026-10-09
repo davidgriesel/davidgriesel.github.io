@@ -1,0 +1,9 @@
+{{- /* The provider's details. They come from build environment variables (HUGO_PROVIDER_NAME, _STREET, _POSTCODE, _CITY, _EMAIL, _PHONE), so they are not stored in the repository. A value that is not set stays the placeholder from content/legal-notice.md, and a production build stops on a placeholder. */ -}}
+{{- $fm := dict -}}
+{{- with site.GetPage "/legal-notice" }}{{ $fm = .Params.provider | default dict }}{{ end -}}
+{{- $out := dict -}}
+{{- range $k, $v := $fm -}}
+  {{- $env := os.Getenv (printf "HUGO_PROVIDER_%s" (upper $k)) -}}
+  {{- if ne $env "" -}}{{- $out = merge $out (dict $k $env) -}}{{- else -}}{{- $out = merge $out (dict $k $v) -}}{{- end -}}
+{{- end -}}
+{{- return $out -}}

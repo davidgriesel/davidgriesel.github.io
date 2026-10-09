@@ -1,0 +1,6 @@
+{{/* Returns the allowed name that matches a tag key, so pages show "Power BI" and not "power-bi". Arguments: taxonomy (tools or skills) and key. */}}
+{{ $found := .key }}
+{{ range index hugo.Data.allowed .taxonomy }}
+  {{ if eq (urlize . | lower) (urlize $.key | lower) }}{{ $found = . }}{{ end }}
+{{ end }}
+{{ return $found }}

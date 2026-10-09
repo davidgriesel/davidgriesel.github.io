@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale }}">
+<head>
+{{ partial "head.html" . }}
+</head>
+<body>
+<a class="skip" href="#main">{{ i18n "skipToContent" }}</a>
+{{ partial "header.html" . }}
+<main id="main" tabindex="-1">
+{{ partial "check-content.html" . }}
+{{ block "main" . }}{{ end }}
+</main>
+{{ partial "footer.html" . }}
+{{ with resources.Get "js/site.js" | minify | fingerprint }}<script src="{{ .RelPermalink }}" defer></script>{{ end }}
+</body>
+</html>

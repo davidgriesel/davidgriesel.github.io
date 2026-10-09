@@ -1,0 +1,140 @@
+[skipToContent]
+other = "Skip to content"
+[mainNavigation]
+other = "Main"
+[findMe]
+other = "Find me"
+[navProjects]
+other = "Projects"
+[navCaseStudies]
+other = "Case studies"
+[navTools]
+other = "Tools"
+[navSkills]
+other = "Skills"
+[navAbout]
+other = "About"
+[legalNotice]
+other = "Legal notice (Impressum)"
+[privacyNotice]
+other = "Privacy notice"
+[footerNavigation]
+other = "Footer"
+[email]
+other = "Email"
+[linkedin]
+other = "LinkedIn"
+[tableauPublic]
+other = "Tableau Public"
+[github]
+other = "GitHub"
+[linkGithub]
+other = "Code on GitHub"
+[linkTableau]
+other = "View on Tableau Public"
+[linkPowerbi]
+other = "View on Power BI Service"
+[linkDemo]
+other = "Live demo"
+[demoNote]
+other = "The demo uses synthetic data only."
+[caseStudy]
+other = "Case study"
+[readCaseStudy]
+other = "Read the case study"
+[projectPage]
+other = "Project"
+[tools]
+other = "Tools"
+[skills]
+other = "Skills"
+[tool]
+other = "Tool"
+[skill]
+other = "Skill"
+[filterTool]
+other = "Tool"
+[filterSkill]
+other = "Skill"
+[filterAny]
+other = "All"
+[filterCount]
+other = "{{ .Count }} shown"
+[noProjects]
+other = "Projects will be added here as they are finished."
+[noCaseStudies]
+other = "No case studies yet."
+[projectsOnTag]
+other = "Projects with this tag"
+[latestProjects]
+other = "Latest projects"
+[featuredCaseStudies]
+other = "Featured case studies"
+[browseByTool]
+other = "Browse by tool"
+[browseBySkill]
+other = "Browse by skill"
+[allProjects]
+other = "All projects"
+[loadView]
+other = "Load the interactive view from Tableau Public"
+[loadViewNote]
+other = "Loading it connects your browser to Tableau (Salesforce, USA), which receives your IP address and may set cookies."
+[privacyNoticeShort]
+other = "Privacy notice"
+[pageNotFound]
+other = "Page not found"
+[pageNotFoundText]
+other = "The page you asked for does not exist."
+[providerName]
+other = "Name"
+[providerAddress]
+other = "Address"
+[providerEmail]
+other = "Email"
+[providerPhone]
+other = "Telephone"
+[noEntries]
+other = "No entries."
+[tagline]
+other = "Data analytics and BI · Hamburg"
+[readProject]
+other = "Read the project"
+[workSoFar]
+other = "Work so far"
+[workSoFarText]
+other = "Projects will be added here as they are finished. In the meantime the code and dashboards are on these profiles."
+[aboutBand]
+other = "About"
+[aboutLink]
+other = "More about me"
+[contactLine]
+other = "Open to contract projects and full-time roles."
+[getInTouch]
+other = "Get in touch"
+[onThisPage]
+other = "On this page"
+[filterBy]
+other = "Filter by"
+[projectsShown]
+other = "shown"
+[footerLegal]
+other = "Legal"
+[footerElsewhere]
+other = "Elsewhere"
+[footerContact]
+other = "Contact"
+[navToolsSkills]
+other = "Tools & Skills"
+[toolsAndSkills]
+other = "Tools and skills"
+[caseStudiesWithTag]
+other = "Case studies with this tag"
+[pageSwitchedOff]
+other = "This page is not available."
+[aboutSkillsTools]
+other = "Skills and tools"
+[sample]
+other = "Sample"
+[sampleNote]
+other = "This is a sample, used to test the site. It is not real work."

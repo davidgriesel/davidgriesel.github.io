@@ -1,0 +1,12 @@
+{{/* Writes a string as numeric HTML entities (a becomes &#97;), so a browser shows it as normal text but a simple scraper that reads the raw HTML does not find it. No script is needed. */}}
+{{- $ascii := " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" -}}
+{{- $out := "" -}}
+{{- range split (printf "%v" .) "" -}}
+  {{- if strings.Contains $ascii . -}}
+    {{- $pos := len (index (split $ascii .) 0) -}}
+    {{- $out = print $out (printf "&#%d;" (add $pos 32)) -}}
+  {{- else -}}
+    {{- $out = print $out . -}}
+  {{- end -}}
+{{- end -}}
+{{- return ($out | safeHTML) -}}

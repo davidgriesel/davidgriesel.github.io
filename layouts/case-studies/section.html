@@ -1,0 +1,12 @@
+{{ define "main" }}
+<div class="wrap page-head">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+</div>
+<div class="wrap">
+  {{ if .Pages }}
+  {{ if site.Params.showToolsAndSkills }}<div class="filters" data-filters hidden></div>{{ end }}
+  <div class="cards">{{ range .Pages.ByDate.Reverse }}{{ partial "case-card.html" . }}{{ end }}</div>
+  {{ else }}<p>{{ i18n "noCaseStudies" }}</p>{{ end }}
+</div>
+{{ end }}

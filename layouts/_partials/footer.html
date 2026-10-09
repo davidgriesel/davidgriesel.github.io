@@ -1,0 +1,20 @@
+{{ $prov := partial "provider.html" . }}
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <nav aria-label="{{ i18n "footerNavigation" }}">
+      <p class="label">{{ i18n "footerLegal" }}</p>
+      <ul>
+        <li><a href="{{ "/legal-notice/" | relLangURL }}">{{ i18n "legalNotice" }}</a></li>
+        <li><a href="{{ "/privacy/" | relLangURL }}">{{ i18n "privacyNotice" }}</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p class="label">{{ i18n "footerElsewhere" }}</p>
+      {{ partial "profiles.html" (dict "class" "stack" "label" "findMe") }}
+    </div>
+    <div>
+      <p class="label">{{ i18n "footerContact" }}</p>
+      {{ with $prov.email }}<p class="footer-email"><a {{ printf "href=\"mailto:%s\"" (partial "encode.html" .) | safeHTMLAttr }}>{{ partial "encode.html" . }}</a></p>{{ end }}
+    </div>
+  </div>
+</footer>

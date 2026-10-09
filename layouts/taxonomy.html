@@ -1,0 +1,13 @@
+{{ define "main" }}
+{{ if not site.Params.showToolsAndSkills }}
+<div class="wrap prose page-body"><p>{{ i18n "pageSwitchedOff" }} <a href="{{ "/projects/" | relLangURL }}">{{ i18n "navProjects" }}</a></p></div>
+{{ else }}
+{{ $tax := .Data.Plural }}
+<div class="wrap">
+  <h1>{{ i18n $tax }}</h1>
+  <ul class="tags">
+    {{ range .Data.Terms.Alphabetical }}{{ $n := partial "tagname.html" (dict "taxonomy" $tax "key" .Page.Title) }}<li class="tag {{ if eq $tax "tools" }}tool{{ else }}skill{{ end }}"><a href="{{ .Page.RelPermalink }}">{{ $n }} <span class="count">{{ .Count }}</span></a></li>{{ else }}<li>{{ i18n "noEntries" }}</li>{{ end }}
+  </ul>
+</div>
+{{ end }}
+{{ end }}

@@ -1,0 +1,4 @@
+<ul class="tags">
+  {{ range .Params.tools }}<li class="tag tool"><a href="{{ printf "/tools/%s/" (urlize .) | relLangURL }}"><span class="visually-hidden">{{ i18n "tool" }}: </span>{{ . }}</a></li>{{ end }}
+  {{ range .Params.skills }}<li class="tag skill"><a href="{{ printf "/skills/%s/" (urlize .) | relLangURL }}"><span class="visually-hidden">{{ i18n "skill" }}: </span>{{ . }}</a></li>{{ end }}
+</ul>

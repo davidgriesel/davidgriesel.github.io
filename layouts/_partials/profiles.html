@@ -1,0 +1,6 @@
+{{ $p := site.Params.profiles }}
+<ul class="{{ .class }}" aria-label="{{ i18n .label }}">
+  {{ with $p.linkedin }}<li><a href="{{ . }}" rel="noopener">{{ i18n "linkedin" }}</a></li>{{ end }}
+  {{ with $p.tableau }}<li><a href="{{ . }}" rel="noopener">{{ i18n "tableauPublic" }}</a></li>{{ end }}
+  {{ with $p.github }}<li><a href="{{ . }}" rel="noopener">{{ i18n "github" }}</a></li>{{ end }}
+</ul>

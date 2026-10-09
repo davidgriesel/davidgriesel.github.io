@@ -1,0 +1,13 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{ $title := site.Title }}{{ if not .IsHome }}{{ $title = printf "%s · %s" .Title site.Title }}{{ end }}
+<title>{{ $title }}</title>
+{{ $desc := .Params.description | default .Params.hook | default site.Params.description }}
+<meta name="description" content="{{ $desc | plainify | truncate 160 }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<link rel="icon" href="data:,">
+{{ if .Params.sample }}<meta name="robots" content="noindex">{{ end }}
+{{ if and (not site.Params.showToolsAndSkills) (or (eq .Layout "toolsskills") (eq .Kind "taxonomy")) }}<meta http-equiv="refresh" content="0; url={{ "/projects/" | relLangURL }}"><meta name="robots" content="noindex">{{ end }}
+<link rel="preload" href="{{ "/fonts/playfair-display-latin-wght-normal.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ "/fonts/source-serif-4-latin-wght-normal.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+{{ with resources.Get "css/main.css" | minify | fingerprint }}<link rel="stylesheet" href="{{ .RelPermalink }}">{{ end }}

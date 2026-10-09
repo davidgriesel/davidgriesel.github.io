@@ -1,0 +1,7 @@
+{{ if . }}
+<div class="cards">
+  {{ range . }}{{ partial "card.html" . }}{{ end }}
+</div>
+{{ else }}
+<p>{{ i18n "noProjects" }}</p>
+{{ end }}

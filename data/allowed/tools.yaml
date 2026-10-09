@@ -1,0 +1,8 @@
+# Allowed tool names. The build fails if an entry uses a name that is not here.
+# Names are matched exactly: "SQL" and "sql" are different names.
+- Excel
+- Power BI
+- Python
+- SQL
+- Streamlit
+- Tableau

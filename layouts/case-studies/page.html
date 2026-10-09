@@ -1,0 +1,33 @@
+{{ define "main" }}
+{{ $slug := .Params.project }}
+{{ $entry := index (where (where site.RegularPages "Section" "projects") "File.ContentBaseName" $slug) 0 }}
+{{ if not $entry }}{{ errorf "Case study %q names the project %q, which does not exist (or is a draft in a production build)." .File.Path $slug }}{{ end }}
+{{ $p := . }}
+{{ range .Params.images | default (slice) }}{{ if not .alt }}{{ errorf "Case study %q: image %q has no alt text." $p.File.Path .file }}{{ end }}{{ if not ($p.Resources.GetMatch .file) }}{{ errorf "Case study %q: image %q is not in its folder." $p.File.Path .file }}{{ end }}{{ end }}
+<article class="entry accent-{{ $entry.Params.accent | default "ink" }}">
+  <header class="entry-head">
+    <div class="wrap">
+      <p class="label">{{ i18n "caseStudy" }}</p>
+      <h1>{{ .Title }}</h1>
+      {{ if .Params.sample }}<p class="note sample-note">{{ i18n "sampleNote" }}</p>{{ end }}
+      {{ with .Params.hook }}<p class="hook">{{ . }}</p>{{ end }}
+      {{ with $entry }}{{ partial "case-tags.html" . }}{{ end }}
+      {{ with $entry }}{{ partial "entry-links.html" . }}{{ end }}
+      {{ with $entry }}<p>{{ i18n "projectPage" }}: <a href="{{ .RelPermalink }}">{{ .Title }}</a></p>{{ end }}
+    </div>
+  </header>
+  <div class="wrap entry-grid">
+    {{ with .TableOfContents }}{{ if gt (len $p.Fragments.Headings) 0 }}<aside class="toc" aria-label="{{ i18n "onThisPage" }}"><p class="label">{{ i18n "onThisPage" }}</p>{{ . }}</aside>{{ end }}{{ end }}
+    <div class="prose entry-body">
+      {{ range .Params.images | default (slice) }}
+        {{ $item := . }}
+        {{ with $p.Resources.GetMatch $item.file }}
+          {{ $img := .Resize "960x webp q80" }}
+          <figure class="frame"><img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ $item.alt }}" loading="lazy"></figure>
+        {{ end }}
+      {{ end }}
+      {{ .Content }}
+    </div>
+  </div>
+</article>
+{{ end }}

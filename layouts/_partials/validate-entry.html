@@ -1,0 +1,21 @@
+{{/* Stops the build, with a message naming the entry, when an entry breaks the content rules. */}}
+{{ $p := . }}
+{{ $where := printf "Entry %q" $p.File.Path }}
+{{ if not $p.Params.hook }}{{ errorf "%s has no hook (a one-line description)." $where }}{{ end }}
+{{ if not $p.Date }}{{ errorf "%s has no date." $where }}{{ end }}
+{{ $tools := $p.Params.tools | default (slice) }}
+{{ $skills := $p.Params.skills | default (slice) }}
+{{ if and (eq (len $tools) 0) (eq (len $skills) 0) }}{{ errorf "%s needs at least one tool or one skill." $where }}{{ end }}
+{{ range $tools }}{{ if not (in hugo.Data.allowed.tools .) }}{{ errorf "%s uses the unknown tool %q. Correct the name, or add it to data/allowed/tools.yaml." $where . }}{{ end }}{{ end }}
+{{ range $skills }}{{ if not (in hugo.Data.allowed.skills .) }}{{ errorf "%s uses the unknown skill %q. Correct the name, or add it to data/allowed/skills.yaml." $where . }}{{ end }}{{ end }}
+{{ $links := $p.Params.links | default dict }}
+{{ range $k, $v := $links }}
+  {{ if not (in (slice "github" "tableau" "powerbi" "demo") $k) }}{{ errorf "%s has an unknown link type %q. Allowed: github, tableau, powerbi, demo." $where $k }}{{ end }}
+  {{ if not (strings.HasPrefix (printf "%v" $v) "https://") }}{{ errorf "%s: the %s link must start with https://" $where $k }}{{ end }}
+{{ end }}
+{{ range $p.Params.images | default (slice) }}
+  {{ if not .alt }}{{ errorf "%s: image %q has no alt text (a description for screen readers)." $where .file }}{{ end }}
+  {{ if not ($p.Resources.GetMatch .file) }}{{ errorf "%s: image %q is not in the entry's folder." $where .file }}{{ end }}
+{{ end }}
+{{ with $p.Params.accent }}{{ if not (in hugo.Data.allowed.accents .) }}{{ errorf "%s uses the unknown accent %q. Allowed: see data/allowed/accents.yaml." $where . }}{{ end }}{{ end }}
+{{ if and $p.Params.embed (not $links.tableau) }}{{ errorf "%s sets embed but has no tableau link." $where }}{{ end }}

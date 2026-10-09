@@ -1,0 +1,52 @@
+{{ define "main" }}
+{{ $projects := (where site.RegularPages "Section" "projects").ByDate.Reverse }}
+{{ $featured := where (where site.RegularPages "Section" "case-studies") "Params.featured" true }}
+{{ $prov := partial "provider.html" . }}
+<section class="hero">
+  <div class="wrap">
+    <h1>{{ .Params.headline | default .Title }}</h1>
+    <div class="lede">{{ .Content }}</div>
+  </div>
+</section>
+
+{{ range $i, $p := first 3 $projects }}
+  {{ partial "band.html" (dict "page" $p "n" (add $i 1) "flip" (eq (mod $i 2) 1)) }}
+{{ else }}
+  <section class="band">
+    <div class="wrap">
+      <h2>{{ i18n "workSoFar" }}</h2>
+      <p class="hook">{{ i18n "workSoFarText" }}</p>
+      {{ partial "profiles.html" (dict "class" "profiles hero-links" "label" "findMe") }}
+    </div>
+  </section>
+{{ end }}
+
+
+{{ if $featured }}
+<section class="band plain">
+  <div class="wrap">
+    <h2>{{ i18n "featuredCaseStudies" }}</h2>
+    <div class="cards">
+      {{ range $featured }}{{ partial "case-card.html" . }}{{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<section class="band plain about-band">
+  <div class="wrap about-grid">
+    <h2>{{ i18n "aboutBand" }}</h2>
+    <div>
+      <p>{{ with site.GetPage "/about" }}{{ .Params.summary }}{{ end }}</p>
+      <p><a href="{{ "/about/" | relLangURL }}">{{ i18n "aboutLink" }}</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="band contact-band">
+  <div class="wrap contact-grid">
+    <p class="contact-line">{{ i18n "contactLine" }}</p>
+    {{ with $prov.email }}<a class="button dark" {{ printf "href=\"mailto:%s\"" (partial "encode.html" .) | safeHTMLAttr }}>{{ i18n "getInTouch" }}</a>{{ end }}
+  </div>
+</section>
+{{ end }}

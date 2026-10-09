@@ -1,0 +1,10 @@
+{{ define "main" }}
+<div class="wrap page-head">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+</div>
+<div class="wrap">
+  {{ if and site.Params.showToolsAndSkills .Pages }}<div class="filters" data-filters hidden></div>{{ end }}
+  {{ partial "card-list.html" .Pages.ByDate.Reverse }}
+</div>
+{{ end }}

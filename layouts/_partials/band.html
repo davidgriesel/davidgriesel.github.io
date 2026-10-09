@@ -1,0 +1,18 @@
+{{ $p := .page }}
+{{ partial "validate-entry.html" $p }}
+{{ $acc := $p.Params.accent | default "ink" }}
+<section class="band accent-{{ $acc }}{{ if .flip }} flip{{ end }}">
+  <div class="wrap band-grid">
+    <div class="band-text">
+      <p class="num" aria-hidden="true">{{ printf "%02d" .n }}</p>
+      {{ with $p.Params.topic }}<p class="label">{{ . }}</p>{{ end }}
+      {{ if $p.Params.sample }}<p class="badge sample">{{ i18n "sample" }}</p>{{ end }}
+      <h2><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h2>
+      <p class="hook">{{ $p.Params.hook }}</p>
+      {{ partial "entry-tags.html" $p }}
+      <p><a class="button" href="{{ $p.RelPermalink }}">{{ i18n "readProject" }}</a></p>
+    </div>
+    {{ $img := partial "entry-image.html" (dict "page" $p "width" "800x" "alt" true) }}
+    {{ with $img }}<figure class="frame">{{ . }}</figure>{{ end }}
+  </div>
+</section>
