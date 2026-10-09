@@ -1,6 +1,7 @@
 {{ $p := site.Params.profiles }}
-<ul class="{{ .class }}" aria-label="{{ i18n .label }}">
-  {{ with $p.linkedin }}<li><a href="{{ . }}" rel="noopener">{{ i18n "linkedin" }}</a></li>{{ end }}
-  {{ with $p.tableau }}<li><a href="{{ . }}" rel="noopener">{{ i18n "tableauPublic" }}</a></li>{{ end }}
-  {{ with $p.github }}<li><a href="{{ . }}" rel="noopener">{{ i18n "github" }}</a></li>{{ end }}
+{{ $start := .start }}
+<ul class="{{ .class }}" aria-label="{{ i18n .label }}" role="list">
+  {{ with $p.linkedin }}<li{{ with $start }} style="grid-column: {{ . }}"{{ end }}><a href="{{ . }}" rel="noopener">{{ i18n "linkedin" }}<span class="ext" aria-hidden="true">↗</span><span class="visually-hidden"> {{ i18n "externalSite" }}</span></a></li>{{ end }}
+  {{ with $p.tableau }}<li{{ with $start }} style="grid-column: {{ add . 1 }}"{{ end }}><a href="{{ . }}" rel="noopener">{{ i18n "tableauPublic" }}<span class="ext" aria-hidden="true">↗</span><span class="visually-hidden"> {{ i18n "externalSite" }}</span></a></li>{{ end }}
+  {{ with $p.github }}<li{{ with $start }} style="grid-column: {{ add . 2 }}"{{ end }}><a href="{{ . }}" rel="noopener">{{ i18n "github" }}<span class="ext" aria-hidden="true">↗</span><span class="visually-hidden"> {{ i18n "externalSite" }}</span></a></li>{{ end }}
 </ul>

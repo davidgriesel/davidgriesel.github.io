@@ -5,7 +5,8 @@
 </div>
 <div class="wrap">
   {{ if .Pages }}
-  {{ if site.Params.showToolsAndSkills }}<div class="filters" data-filters hidden></div>{{ end }}
+  {{ if .Pages }}<div class="filters" data-filters data-chips="{{ if site.Params.showToolsAndSkills }}true{{ else }}false{{ end }}" data-noun="{{ i18n "nounCaseStudies" }}" data-noun-one="{{ i18n "nounCaseStudy" }}" data-showing="{{ i18n "filterShowing" }}" data-using="{{ i18n "filterUsing" }}" data-and="{{ i18n "filterAnd" }}" data-clear="{{ i18n "filterClear" }}" hidden></div>{{ end }}
+  <h2 class="visually-hidden">{{ i18n "navCaseStudies" }}</h2>
   <div class="cards">{{ range .Pages.ByDate.Reverse }}{{ partial "case-card.html" . }}{{ end }}</div>
   {{ else }}<p>{{ i18n "noCaseStudies" }}</p>{{ end }}
 </div>

@@ -99,13 +99,34 @@ else bad "build with the details from the environment succeeds"; fi
 unset HUGO_PROVIDER_NAME HUGO_PROVIDER_STREET HUGO_PROVIDER_POSTCODE HUGO_PROVIDER_CITY HUGO_PROVIDER_EMAIL HUGO_PROVIDER_PHONE
 grep -qE "Johan|Hartwig|Hesse|contact@davidgriesel|[0-9]{5} Hamburg" "$root/content/legal-notice.md" && bad "no personal details are stored in content/legal-notice.md" || ok "no personal details are stored in content/legal-notice.md"
 
+echo "Header, external links and the About portrait"
+grep -q 'data-compact-bar' "$site/index.html" && ok "the compact bar is on every page" || bad "the compact bar is on every page"
+grep -q 'class="ext"' "$site/index.html" && ok "external links carry a marker" || bad "external links carry a marker"
+d="$(copy_site portrait)"
+mkdir -p "$d/assets/images"
+python3 - "$d" <<'PY'
+import sys, zlib, struct
+def chunk(t, b): c = struct.pack('>I', len(b)) + t + b; return c + struct.pack('>I', zlib.crc32(t + b) & 0xffffffff)
+w, h = 300, 400
+raw = b''.join(b'\x00' + bytes([120, 140, 160]) * w for _ in range(h))
+open(sys.argv[1] + '/assets/images/portrait.png', 'wb').write(b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', struct.pack('>IIBBBBB', w, h, 8, 2, 0, 0, 0)) + chunk(b'IDAT', zlib.compress(raw, 9)) + chunk(b'IEND', b''))
+PY
+sed -i.bak 's/^# portrait:/portrait:/; s/^#   file: portrait.jpg/  file: portrait.png/; s/^#   alt: "Describe the photo for screen readers."/  alt: "A test portrait."/' "$d/content/about.md"
+if (cd "$d" && hugo --environment test -D --destination "$d/out" >/dev/null 2>&1); then
+  grep -q 'class="portrait"' "$d/out/about/index.html" && ok "a portrait appears on the About page" || bad "a portrait appears on the About page"
+  if find "$d/out" -name 'portrait.png' | grep -q .; then bad "the original photo is not published"; else ok "the original photo is not published"; fi
+else bad "build with a portrait succeeds"; fi
+d="$(copy_site portrait-missing)"
+sed -i.bak 's/^# portrait:/portrait:/; s/^#   file: portrait.jpg/  file: nothere.jpg/; s/^#   alt: "Describe the photo for screen readers."/  alt: "A test portrait."/' "$d/content/about.md"
+expect_fail "a portrait that is not in assets/images stops the build" "$d" 'is not in assets/images'
+
 echo "Only tools and skills with a project behind them are listed"
 if grep -q "Machine learning" "$site/about/index.html" "$site/tools-and-skills/index.html" "$site/projects/index.html"; then bad "a skill without a project is not listed"; else ok "a skill without a project is not listed"; fi
-grep -q "Skills and tools" "$site/about/index.html" && ok "the about page lists the tools and skills in use" || bad "the about page lists the tools and skills in use"
+grep -q "Tools and skills" "$site/about/index.html" && ok "the about page lists the tools and skills in use" || bad "the about page lists the tools and skills in use"
 d="$(copy_site no-drafts)"
 rm -rf "$d"/content/projects/project-* "$d"/content/case-studies/case-study-*
 if (cd "$d" && hugo --environment test --destination "$d/out" >/dev/null 2>&1); then
-  grep -q "Skills and tools" "$d/out/about/index.html" && bad "no list appears when no project is published" || ok "no list appears when no project is published"
+  grep -q "Tools and skills" "$d/out/about/index.html" && bad "no list appears when no project is published" || ok "no list appears when no project is published"
 else bad "build without drafts succeeds"; fi
 
 echo "Navigation and tag links"
@@ -134,12 +155,16 @@ d="$(copy_site tags-off)"
 if (cd "$d" && HUGO_PARAMS_SHOWTOOLSANDSKILLS=false hugo --environment test -D --destination "$d/out" >/dev/null 2>&1); then
   o="$d/out"
   if grep -q 'href="/tools-and-skills/"' "$o/index.html"; then bad "the header link disappears when switched off"; else ok "the header link disappears when switched off"; fi
-  if grep -q "data-filters" "$o/projects/index.html" "$o/case-studies/index.html"; then bad "the filters disappear when switched off"; else ok "the filters disappear when switched off"; fi
+  if grep -q 'data-chips="true"' "$o/projects/index.html" "$o/case-studies/index.html"; then bad "the chip rows disappear when switched off"; else ok "the chip rows disappear when switched off"; fi
   grep -q 'http-equiv="\?refresh' "$o/tools-and-skills/index.html" && grep -q 'http-equiv="\?refresh' "$o/tools/index.html" && grep -q 'http-equiv="\?refresh' "$o/skills/index.html" \
     && ok "the Tools & Skills page and the index pages send a visitor to Projects" || bad "the Tools & Skills page and the index pages send a visitor to Projects"
-  if grep -q 'href="/case-studies/?tool=' "$o/case-studies/index.html"; then bad "case study chips are plain labels when switched off"; else ok "case study chips are plain labels when switched off"; fi
-  grep -q 'href="/tools/python/"' "$o/projects/index.html" && ok "project chips still link to their tag page" || bad "project chips still link to their tag page"
+  grep -q 'href="/projects/?tool=Python"' "$o/projects/index.html" && ok "project chips filter the projects list when switched off" || bad "project chips filter the projects list when switched off"
+  grep -q 'href="/case-studies/?tool=Python"' "$o/case-studies/index.html" && ok "case-study chips filter the case studies list when switched off" || bad "case-study chips filter the case studies list when switched off"
+  grep -q 'data-chips="false"' "$o/projects/index.html" && grep -q 'data-chips="false"' "$o/case-studies/index.html" && ok "the chip rows are off but the status line is available" || bad "the chip rows are off but the status line is available"
 else bad "build with the switch off succeeds"; fi
+grep -q 'href="/tools/python/"' "$site/projects/index.html" && ok "project chips link to their tag page when switched on" || bad "project chips link to their tag page when switched on"
+grep -q "All projects" "$site/tools/python/index.html" && ok "a tag page links back to all projects" || bad "a tag page links back to all projects"
+grep -q 'data-chips="true"' "$site/projects/index.html" && grep -q 'data-clear=' "$site/projects/index.html" && grep -q 'data-clear=' "$site/case-studies/index.html" && ok "both filter rows can say what is shown and clear it" || bad "both filter rows can say what is shown and clear it"
 grep -q 'href="/tools-and-skills/"' "$site/index.html" && ok "the header link appears when switched on" || bad "the header link appears when switched on"
 grep -q 'http-equiv="\?refresh' "$site/tools-and-skills/index.html" && bad "the Tools & Skills page does not redirect when switched on" || ok "the Tools & Skills page does not redirect when switched on"
 

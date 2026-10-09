@@ -4,7 +4,8 @@
   {{ .Content }}
 </div>
 <div class="wrap">
-  {{ if and site.Params.showToolsAndSkills .Pages }}<div class="filters" data-filters hidden></div>{{ end }}
+  {{ if .Pages }}<div class="filters" data-filters data-chips="{{ if site.Params.showToolsAndSkills }}true{{ else }}false{{ end }}" data-noun="{{ i18n "nounProjects" }}" data-noun-one="{{ i18n "nounProject" }}" data-showing="{{ i18n "filterShowing" }}" data-using="{{ i18n "filterUsing" }}" data-and="{{ i18n "filterAnd" }}" data-clear="{{ i18n "filterClear" }}" hidden></div>{{ end }}
+  <h2 class="visually-hidden">{{ i18n "allProjects" }}</h2>
   {{ partial "card-list.html" .Pages.ByDate.Reverse }}
 </div>
 {{ end }}

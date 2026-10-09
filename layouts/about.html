@@ -1,0 +1,19 @@
+{{ define "main" }}
+<div class="wrap page-body about-grid2">
+  <div class="prose">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+  </div>
+  {{ with .Params.portrait }}
+    {{ $file := .file }}
+    {{ $alt := .alt }}
+    {{ if not $alt }}{{ errorf "The portrait on the About page needs alt text (portrait.alt in content/about.md)." }}{{ end }}
+    {{ with resources.Get (printf "images/%s" $file) }}
+      {{ $img := .Fill "480x600 center webp q85" }}
+      <figure class="portrait"><img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ $alt }}"></figure>
+    {{ else }}
+      {{ errorf "The portrait %q is not in assets/images/ (set in content/about.md)." $file }}
+    {{ end }}
+  {{ end }}
+</div>
+{{ end }}

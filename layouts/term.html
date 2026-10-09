@@ -2,6 +2,7 @@
 {{ $tax := .Data.Plural }}
 {{ $n := partial "tagname.html" (dict "taxonomy" $tax "key" .Data.Term) }}
 <div class="wrap page-head">
+  <p class="back"><a href="{{ "/projects/" | relLangURL }}">{{ i18n "backToProjects" }}</a></p>
   <p class="kicker">{{ if eq $tax "tools" }}{{ i18n "tool" }}{{ else }}{{ i18n "skill" }}{{ end }}</p>
   <h1>{{ $n }}</h1>
 </div>

@@ -12,7 +12,7 @@
       <a class="brand" href="{{ "/" | relLangURL }}">{{ site.Title }}</a>
       <p class="tagline">{{ i18n "tagline" }}</p>
     </div>
-    <div class="header-right">
+    <div class="header-right" style="--cols: {{ len $items }}">
       <nav aria-label="{{ i18n "mainNavigation" }}">
         <ul>
           {{ range $items }}
@@ -23,7 +23,20 @@
           {{ end }}
         </ul>
       </nav>
-      {{ partial "profiles.html" (dict "class" "profiles header-links" "label" "findMe") }}
+      {{ partial "profiles.html" (dict "class" "profiles header-links" "label" "findMe" "start" (sub (len $items) 2)) }}
     </div>
   </div>
 </header>
+<div class="compact-bar" data-compact-bar aria-hidden="true">
+  <div class="wrap compact-inner">
+    <a class="compact-brand" href="{{ "/" | relLangURL }}" tabindex="-1">{{ site.Title }}</a>
+    <ul>
+      {{ range $items }}
+        {{ $url := .url | relLangURL }}
+        {{ $current := "" }}
+        {{ if eq $page.RelPermalink $url }}{{ $current = "page" }}{{ else if in .sections $page.Section }}{{ $current = "true" }}{{ end }}
+        <li><a href="{{ $url }}" tabindex="-1"{{ with $current }} aria-current="{{ . }}"{{ end }}>{{ .label }}</a></li>
+      {{ end }}
+    </ul>
+  </div>
+</div>

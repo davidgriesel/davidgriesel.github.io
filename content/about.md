@@ -1,5 +1,10 @@
 ---
 title: "About"
+layout: about
+# To show a portrait, put the file in assets/images/ (not in content/, so the original is never published) and add:
+# portrait:
+#   file: portrait.jpg
+#   alt: "Describe the photo for screen readers."
 summary: "Data analyst based in Hamburg, with a background in accounting and public-sector audit. I now build end-to-end analytics solutions with Python, SQL, Power BI and Tableau."
 description: "Background, skills and languages of David Griesel, a data analyst based in Hamburg."
 ---

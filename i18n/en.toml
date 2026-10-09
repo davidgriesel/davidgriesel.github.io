@@ -133,8 +133,30 @@ other = "Case studies with this tag"
 [pageSwitchedOff]
 other = "This page is not available."
 [aboutSkillsTools]
-other = "Skills and tools"
+other = "Tools and skills"
 [sample]
 other = "Sample"
 [sampleNote]
 other = "This is a sample, used to test the site. It is not real work."
+[filterShowing]
+other = "Showing"
+[filterUsing]
+other = "using"
+[filterAnd]
+other = "and"
+[filterClear]
+other = "Clear filters"
+[nounProjects]
+other = "projects"
+[nounCaseStudies]
+other = "case studies"
+[backToProjects]
+other = "← All projects"
+[externalSite]
+other = "(external site)"
+[compactBar]
+other = "Quick navigation"
+[nounProject]
+other = "project"
+[nounCaseStudy]
+other = "case study"

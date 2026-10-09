@@ -1,6 +1,6 @@
-{{/* The tools and skills of a case study's project, as chips. With the tools and skills features on they filter the case studies list; with them off they are plain labels. Argument: the project page. */}}
-{{ $on := site.Params.showToolsAndSkills }}
+{{/* The tools and skills of a case study's project, as chips that filter the case studies list. Argument: the project page. */}}
+{{ $list := "/case-studies/" | relLangURL }}
 <ul class="tags">
-  {{ range .Params.tools }}<li class="tag tool">{{ if $on }}<a href="{{ "/case-studies/" | relLangURL }}?tool={{ . | urlquery }}"><span class="visually-hidden">{{ i18n "tool" }}: </span>{{ . }}</a>{{ else }}<span class="pill"><span class="visually-hidden">{{ i18n "tool" }}: </span>{{ . }}</span>{{ end }}</li>{{ end }}
-  {{ range .Params.skills }}<li class="tag skill">{{ if $on }}<a href="{{ "/case-studies/" | relLangURL }}?skill={{ . | urlquery }}"><span class="visually-hidden">{{ i18n "skill" }}: </span>{{ . }}</a>{{ else }}<span class="pill"><span class="visually-hidden">{{ i18n "skill" }}: </span>{{ . }}</span>{{ end }}</li>{{ end }}
+  {{ range .Params.tools }}<li class="tag tool"><a href="{{ $list }}?tool={{ . | urlquery }}"><span class="visually-hidden">{{ i18n "tool" }}: </span>{{ . }}</a></li>{{ end }}
+  {{ range .Params.skills }}<li class="tag skill"><a href="{{ $list }}?skill={{ . | urlquery }}"><span class="visually-hidden">{{ i18n "skill" }}: </span>{{ . }}</a></li>{{ end }}
 </ul>

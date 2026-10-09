@@ -4,7 +4,7 @@
 {{- if or $tools $skills }}
 <h2>{{ i18n "aboutSkillsTools" }}</h2>
 <ul class="tags">
-  {{ range $skills }}{{ $n := partial "tagname.html" (dict "taxonomy" "skills" "key" .Page.Title) }}<li class="tag skill"><a href="{{ .Page.RelPermalink }}">{{ $n }}</a></li>{{ end }}
   {{ range $tools }}{{ $n := partial "tagname.html" (dict "taxonomy" "tools" "key" .Page.Title) }}<li class="tag tool"><a href="{{ .Page.RelPermalink }}">{{ $n }}</a></li>{{ end }}
+  {{ range $skills }}{{ $n := partial "tagname.html" (dict "taxonomy" "skills" "key" .Page.Title) }}<li class="tag skill"><a href="{{ .Page.RelPermalink }}">{{ $n }}</a></li>{{ end }}
 </ul>
 {{- end }}

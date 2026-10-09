@@ -1,4 +1,6 @@
+{{ $on := site.Params.showToolsAndSkills }}
+{{ $list := "/projects/" | relLangURL }}
 <ul class="tags">
-  {{ range .Params.tools }}<li class="tag tool"><a href="{{ printf "/tools/%s/" (urlize .) | relLangURL }}"><span class="visually-hidden">{{ i18n "tool" }}: </span>{{ . }}</a></li>{{ end }}
-  {{ range .Params.skills }}<li class="tag skill"><a href="{{ printf "/skills/%s/" (urlize .) | relLangURL }}"><span class="visually-hidden">{{ i18n "skill" }}: </span>{{ . }}</a></li>{{ end }}
+  {{ range .Params.tools }}<li class="tag tool"><a href="{{ if $on }}{{ printf "/tools/%s/" (urlize .) | relLangURL }}{{ else }}{{ $list }}?tool={{ . | urlquery }}{{ end }}"><span class="visually-hidden">{{ i18n "tool" }}: </span>{{ . }}</a></li>{{ end }}
+  {{ range .Params.skills }}<li class="tag skill"><a href="{{ if $on }}{{ printf "/skills/%s/" (urlize .) | relLangURL }}{{ else }}{{ $list }}?skill={{ . | urlquery }}{{ end }}"><span class="visually-hidden">{{ i18n "skill" }}: </span>{{ . }}</a></li>{{ end }}
 </ul>
