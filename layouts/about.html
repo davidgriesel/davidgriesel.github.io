@@ -25,8 +25,8 @@
       {{ .Content }}
     </div>
     <aside class="about-facts">
-      {{ with .Params.education }}<section class="side-block"><h2>{{ i18n "aboutEducation" }}</h2><p>{{ . }}</p></section>{{ end }}
-      {{ with .Params.languages }}<section class="side-block"><h2>{{ i18n "aboutLanguages" }}</h2><p>{{ . }}</p></section>{{ end }}
+      {{ with .Params.education }}<section class="side-block"><h2>{{ i18n "aboutEducation" }}</h2><ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul></section>{{ end }}
+      {{ with .Params.languages }}<section class="side-block"><h2>{{ i18n "aboutLanguages" }}</h2><ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul></section>{{ end }}
     </aside>
   </div>
 </section>

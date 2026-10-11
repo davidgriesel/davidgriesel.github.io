@@ -202,6 +202,7 @@ dl.provider dd { margin: 0; }
 .side-block { margin-bottom: 1.75rem; }
 .side-block h2 { font-size: 1.3rem; margin: 0 0 .5rem; }
 .side-block p { margin: 0; }
+.side-block ul:not(.tags) { margin: 0; padding-left: 1.25rem; }
 .side-block .tags { margin: 0; }
 .about-tags { background: var(--head); padding: clamp(1.75rem, 4vw, 2.75rem) 0; }
 .about-tags h2 { margin: 0 0 .75rem; font-size: 1.6rem; }

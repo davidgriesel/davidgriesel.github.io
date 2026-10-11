@@ -9,8 +9,14 @@ portrait:
   alt: "David Griesel, head and shoulders, with glasses and a dark collared shirt, looking at the camera with a slight smile."
 intro: >-
   I am a data analyst based in Hamburg, Germany. My career began in accounting and then public-sector audit in South Africa, where I led external audits of national departments and large public entities, and later led data analytics and computer-assisted audit techniques for about 20 audits. I now deliver end-to-end analytics solutions for small and owner-managed businesses.
-education: "Accounting Science Honours degree; Certificate in Data Analytics, CareerFoundry (2024)."
-languages: "English (proficient), German (intermediate, B1), Afrikaans (native), Dutch (elementary)."
+education:
+  - "Accounting Science Honours degree"
+  - "Certificate in Data Analytics"
+languages:
+  - "English (proficient)"
+  - "German (intermediate, B1)"
+  - "Afrikaans (native)"
+  - "Dutch (elementary)"
 summary: "Data analyst based in Hamburg, with a background in accounting and public-sector audit. I now build end-to-end analytics solutions with Python, SQL, Power BI and Tableau."
 description: "Background, skills and languages of David Griesel, a data analyst based in Hamburg."
 ---
