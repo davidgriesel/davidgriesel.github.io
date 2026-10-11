@@ -88,8 +88,14 @@ if (cd "$d" && hugo --environment test -D --destination "$d/out" >/dev/null 2>&1
     if grep -rqF "$value" "$d/out/legal-notice/index.html" "$d/out/index.html"; then details_ok=0; echo "       found as plain text: $value"; fi
   done
   [ "$details_ok" -eq 1 ] && ok "name, street, postcode, email and phone are not in the HTML as plain text" || bad "legal notice details are written as entities"
+  grep -q "Download the resume" "$d/out/about/index.html" && grep -q "button dark" "$d/out/about/index.html" && ok "the About page has the resume as a button" || bad "the About page has the resume as a button"
   grep -q "&#" "$d/out/legal-notice/index.html" && ok "entities are present in the legal notice" || bad "entities are present in the legal notice"
   # decoded, the values must be there: a browser shows them
+  python3 - "$d/out/index.html" <<'PY' && ok "the footer shows the email, the telephone as a tel link and the city" || bad "the footer shows the email, the telephone as a tel link and the city"
+import html, sys
+t = html.unescape(open(sys.argv[1]).read())
+sys.exit(0 if all(v in t for v in ("mailto:test@example.invalid", "tel:+491000000000", "Hamburg, Germany")) else 1)
+PY
   python3 - "$d/out/legal-notice/index.html" <<'PY' && ok "the entities decode to the details" || bad "the entities decode to the details"
 import html, sys
 t = html.unescape(open(sys.argv[1]).read())
@@ -111,13 +117,13 @@ w, h = 300, 400
 raw = b''.join(b'\x00' + bytes([120, 140, 160]) * w for _ in range(h))
 open(sys.argv[1] + '/assets/images/portrait.png', 'wb').write(b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', struct.pack('>IIBBBBB', w, h, 8, 2, 0, 0, 0)) + chunk(b'IDAT', zlib.compress(raw, 9)) + chunk(b'IEND', b''))
 PY
-sed -i.bak 's/^# portrait:/portrait:/; s/^#   file: portrait.jpg/  file: portrait.png/; s/^#   alt: "Describe the photo for screen readers."/  alt: "A test portrait."/' "$d/content/about.md"
+sed -i.bak 's/^  file: portrait.jpg/  file: portrait.png/' "$d/content/about.md"
 if (cd "$d" && hugo --environment test -D --destination "$d/out" >/dev/null 2>&1); then
-  grep -q 'class="portrait"' "$d/out/about/index.html" && ok "a portrait appears on the About page" || bad "a portrait appears on the About page"
+  grep -q 'class="portrait' "$d/out/about/index.html" && ok "a portrait appears on the About page" || bad "a portrait appears on the About page"
   if find "$d/out" -name 'portrait.png' | grep -q .; then bad "the original photo is not published"; else ok "the original photo is not published"; fi
 else bad "build with a portrait succeeds"; fi
 d="$(copy_site portrait-missing)"
-sed -i.bak 's/^# portrait:/portrait:/; s/^#   file: portrait.jpg/  file: nothere.jpg/; s/^#   alt: "Describe the photo for screen readers."/  alt: "A test portrait."/' "$d/content/about.md"
+sed -i.bak 's/^  file: portrait.jpg/  file: nothere.jpg/' "$d/content/about.md"
 expect_fail "a portrait that is not in assets/images stops the build" "$d" 'is not in assets/images'
 
 echo "Only tools and skills with a project behind them are listed"

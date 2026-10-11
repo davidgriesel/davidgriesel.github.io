@@ -1,0 +1,16 @@
+{{- /* A band with the tools and skills that at least one published project uses: tools on the first row, skills on the second. Nothing is written when there are none, so no skill or tool is listed without a project behind it. */ -}}
+{{- $tools := site.Taxonomies.tools.Alphabetical -}}
+{{- $skills := site.Taxonomies.skills.Alphabetical -}}
+{{- if or $tools $skills }}
+<section class="band about-tags">
+  <div class="wrap">
+    <h2>{{ i18n "aboutSkillsTools" }}</h2>
+    {{ if $tools }}<ul class="tags">
+      {{ range $tools }}{{ $n := partial "tagname.html" (dict "taxonomy" "tools" "key" .Page.Title) }}<li class="tag tool"><a href="{{ .Page.RelPermalink }}">{{ $n }}</a></li>{{ end }}
+    </ul>{{ end }}
+    {{ if $skills }}<ul class="tags">
+      {{ range $skills }}{{ $n := partial "tagname.html" (dict "taxonomy" "skills" "key" .Page.Title) }}<li class="tag skill"><a href="{{ .Page.RelPermalink }}">{{ $n }}</a></li>{{ end }}
+    </ul>{{ end }}
+  </div>
+</section>
+{{- end }}

@@ -1,19 +1,48 @@
 {{ define "main" }}
-<div class="wrap page-body about-grid2">
-  <div class="prose">
-    <h1>{{ .Title }}</h1>
-    {{ .Content }}
-  </div>
-  {{ with .Params.portrait }}
-    {{ $file := .file }}
-    {{ $alt := .alt }}
-    {{ if not $alt }}{{ errorf "The portrait on the About page needs alt text (portrait.alt in content/about.md)." }}{{ end }}
-    {{ with resources.Get (printf "images/%s" $file) }}
-      {{ $img := .Fill "480x600 center webp q85" }}
-      <figure class="portrait"><img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ $alt }}"></figure>
-    {{ else }}
-      {{ errorf "The portrait %q is not in assets/images/ (set in content/about.md)." $file }}
+{{ $prov := partial "provider.html" . }}
+<section class="band about-hero">
+  <div class="wrap about-hero-grid">
+    <div class="prose">
+      <h1>{{ .Title }}</h1>
+      <div class="lede">{{ .Params.intro | markdownify }}</div>
+    </div>
+    {{ with .Params.portrait }}
+      {{ $file := .file }}
+      {{ $alt := .alt }}
+      {{ if not $alt }}{{ errorf "The portrait on the About page needs alt text (portrait.alt in content/about.md)." }}{{ end }}
+      {{ with resources.Get (printf "images/%s" $file) }}
+        {{ $img := .Fill "480x600 center webp q85" }}
+        <figure class="portrait"><img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ $alt }}"></figure>
+      {{ else }}
+        {{ errorf "The portrait %q is not in assets/images/ (set in content/about.md)." $file }}
+      {{ end }}
     {{ end }}
-  {{ end }}
-</div>
+  </div>
+</section>
+<section class="band about-details">
+  <div class="wrap about-cols">
+    <div class="about-main prose">
+      {{ .Content }}
+    </div>
+    <aside class="about-facts">
+      {{ with .Params.education }}<section class="side-block"><h2>{{ i18n "aboutEducation" }}</h2><p>{{ . }}</p></section>{{ end }}
+      {{ with .Params.languages }}<section class="side-block"><h2>{{ i18n "aboutLanguages" }}</h2><p>{{ . }}</p></section>{{ end }}
+    </aside>
+  </div>
+</section>
+{{ partial "evidence-tags.html" . }}
+{{ with .Params.resume }}
+<section class="band contact-band about-close">
+  <div class="wrap contact-grid">
+    <div>
+      <h2>{{ i18n "resumeAndContact" }}</h2>
+      <p class="hook">{{ i18n "resumeNote" }}</p>
+    </div>
+    <p class="actions">
+      <a class="button dark" href="{{ . | relURL }}">{{ i18n "resumeDownload" }}</a>
+      {{ with $prov.email }}<a class="button outline" {{ printf "href=\"mailto:%s\"" (partial "encode.html" .) | safeHTMLAttr }}>{{ i18n "getInTouch" }}</a>{{ end }}
+    </p>
+  </div>
+</section>
+{{ end }}
 {{ end }}

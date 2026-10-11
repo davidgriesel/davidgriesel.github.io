@@ -10,7 +10,7 @@
   --display: "Playfair Display", Georgia, "Times New Roman", serif;
   --text: "Source Serif 4", Georgia, "Times New Roman", serif;
   --label: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-  --max: 70rem; --bar: 3.4rem;
+  --max: 70rem; --h2-size: clamp(1.6rem, 3.2vw, 2.4rem); --bar: 3.4rem;
   /* default accent: neutral ink */
   --accent: #1c1b18; --accent-text: #1c1b18; --tint: #ece6d3; --frame: #faf7ec; --on-accent: #ffffff;
 }
@@ -40,7 +40,7 @@ ul.plain, .masthead ul, .site-footer ul, .tags, .links, .profiles { list-style: 
 
 h1, h2, h3 { font-family: var(--display); line-height: 1.15; margin: 0 0 .5rem; letter-spacing: -.01em; }
 h1 { font-size: clamp(2.2rem, 5.5vw, 4rem); font-weight: 800; }
-h2 { font-size: clamp(1.6rem, 3.2vw, 2.4rem); font-weight: 800; }
+h2 { font-size: var(--h2-size); font-weight: 800; }
 h3 { font-size: 1.3rem; font-weight: 700; }
 .label, .eyebrow, .tags, .button, .badge, nav, .note, .toc, .filters, .count { font-family: var(--label); }
 .label, .eyebrow { font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-text); margin: 0 0 .5rem; }
@@ -112,12 +112,16 @@ main { background: var(--page); flex: 1 0 auto; }
 .band.plain.about-band { background: var(--page); }
 .contact-band { background: #e2dac2; color: var(--ink); border-top: 0; }
 .contact-grid { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem 2rem; }
+.actions { display: flex; flex-wrap: wrap; gap: .75rem; margin: 0; }
+.about-close { margin-top: 0; }
+.about-close h2 { margin-bottom: .25rem; }
 .contact-line { font-family: var(--display); font-size: clamp(1.5rem, 3.4vw, 2.2rem); margin: 0; max-width: 36ch; line-height: 1.2; }
 
 /* Buttons, tags */
 .button { display: inline-block; padding: .55rem 1.1rem; background: var(--accent); color: var(--on-accent); border: 0; text-decoration: none; font-size: .9rem; letter-spacing: .03em; cursor: pointer; }
 .button:hover { filter: brightness(.92); }
 .button.dark { background: var(--ink); color: var(--paper); }
+.band .button.outline, .button.outline { background: transparent; color: var(--ink); border: 1px solid var(--ink); padding: calc(.55rem - 1px) calc(1.1rem - 1px); }
 .band .button, .entry-head .button { background: var(--accent); }
 .links { display: flex; flex-wrap: wrap; gap: .75rem 1.25rem; margin: .75rem 0 0; }
 .links .button { background: transparent; color: var(--accent-text); padding: 0; border-bottom: 1px solid currentColor; }
@@ -182,9 +186,34 @@ dl.provider dd { margin: 0; }
 .filter-status { display: flex; flex-wrap: wrap; gap: .25rem 1rem; align-items: center; }
 .filter-clear { font-family: var(--label); font-size: .82rem; background: none; border: 0; padding: .25rem 0; color: var(--ink); text-decoration: underline; cursor: pointer; min-height: 2rem; }
 .portrait { margin: 0; }
+/* About: an introduction band with the portrait, then a band with "How I work" on the left and the facts
+   (tools and skills, education, languages) on the right, then the resume band */
+.about-hero { background: #e2dac2; padding: clamp(2rem, 5vw, 3.5rem) 0; }
+.about-hero-grid { display: grid; gap: 1.5rem 3rem; grid-template-columns: 1fr; align-items: center; }
+.about-hero h1 { margin-top: 0; }
+.about-hero .lede { color: var(--ink); font-size: 1.2rem; }
+.about-hero .lede p { margin: 0; }
+.about-hero .portrait { max-width: 11rem; order: -1; }
+.about-details { background: var(--page); padding: clamp(2rem, 5vw, 3.5rem) 0; }
+.about-cols { display: grid; gap: 2rem 3rem; grid-template-columns: 1fr; }
+.about-main { max-width: none; }
+.about-main > * { max-width: 44rem; }
+.about-main > :first-child { margin-top: 0; }
+.side-block { margin-bottom: 1.75rem; }
+.side-block h2 { font-size: 1.3rem; margin: 0 0 .5rem; }
+.side-block p { margin: 0; }
+.side-block .tags { margin: 0; }
+.about-tags { background: var(--head); padding: clamp(1.75rem, 4vw, 2.75rem) 0; }
+.about-tags h2 { margin: 0 0 .75rem; font-size: 1.6rem; }
+.about-tags .tags { margin: .5rem 0; }
+@media (min-width: 52rem) {
+  .about-hero-grid:has(.portrait) { grid-template-columns: minmax(0, 1fr) 15rem; }
+  .about-hero .portrait { max-width: none; order: 0; }
+  .about-cols { grid-template-columns: minmax(0, 1fr) 18rem; align-items: start; }
+  /* Start the first line of the facts column level with the first line of "How I work": the difference between the two headings' heights */
+  .about-facts { padding-top: calc(1.15 * var(--h2-size) - 1.3rem * 1.15 - .5rem + 1.125rem); }
+}
 .portrait img { display: block; width: 100%; height: auto; border: 1px solid var(--soft-rule); }
-.about-grid2 { display: grid; gap: 1.5rem 3rem; grid-template-columns: 1fr; }
-@media (min-width: 52rem) { .about-grid2:has(.portrait) { grid-template-columns: minmax(0, 44rem) 15rem; align-items: start; } }
 .kicker { font-family: var(--label); font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; margin: 0; }
 
 /* Footer */
@@ -194,7 +223,8 @@ dl.provider dd { margin: 0; }
 .footer-grid .label { color: var(--muted); margin-bottom: .4rem; }
 .footer-grid ul { display: flex; flex-direction: column; gap: .15rem; }
 .footer-grid a { display: inline-block; padding: .2rem 0; }
-.footer-email { margin: 0; overflow-wrap: anywhere; }
+.footer-email { margin: 0 0 .15rem; overflow-wrap: anywhere; }
+.footer-place { margin: .35rem 0 0; color: var(--muted); }
 @media (min-width: 40rem) { .footer-grid > :last-child { text-align: right; } }
 .site-footer a { color: var(--ink); }
 

@@ -15,6 +15,8 @@
     <div>
       <p class="label">{{ i18n "footerContact" }}</p>
       {{ with $prov.email }}<p class="footer-email"><a {{ printf "href=\"mailto:%s\"" (partial "encode.html" .) | safeHTMLAttr }}>{{ partial "encode.html" . }}</a></p>{{ end }}
+      {{ with $prov.phone }}<p class="footer-email"><a {{ printf "href=\"tel:%s\"" (partial "encode.html" (replaceRE `[^+0-9]` "" .)) | safeHTMLAttr }}>{{ partial "encode.html" . }}</a></p>{{ end }}
+      <p class="footer-place">{{ i18n "footerPlace" }}</p>
     </div>
   </div>
 </footer>

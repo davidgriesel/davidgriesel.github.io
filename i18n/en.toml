@@ -160,3 +160,15 @@ other = "Quick navigation"
 other = "project"
 [nounCaseStudy]
 other = "case study"
+[footerPlace]
+other = "Hamburg, Germany"
+[resumeAndContact]
+other = "Resume and contact"
+[resumeDownload]
+other = "Download the resume (PDF)"
+[resumeNote]
+other = "Email and telephone are in the footer and in the legal notice."
+[aboutEducation]
+other = "Education"
+[aboutLanguages]
+other = "Languages"
