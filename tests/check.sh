@@ -181,6 +181,16 @@ echo "Sample content"
 grep -q 'badge sample' "$site/projects/index.html" && ok "sample cards are labelled" || bad "sample cards are labelled"
 grep -q 'name="robots" content="noindex"' "$site/projects/project-1/index.html" && ok "sample pages are kept out of search engines" || bad "sample pages are kept out of search engines"
 grep -q "project-1" "$site/sitemap.xml" && bad "sample pages are left out of the sitemap" || ok "sample pages are left out of the sitemap"
+grep -q "Sitemap: https://" "$site/robots.txt" && ok "robots.txt names the sitemap" || bad "robots.txt names the sitemap"
+grep -q '/tools/python/' "$site/sitemap.xml" && ok "with the tools and skills switch on, their pages are in the sitemap" || bad "with the tools and skills switch on, their pages are in the sitemap"
+d="$(copy_site sitemap-off)"
+if (cd "$d" && HUGO_PARAMS_SHOWTOOLSANDSKILLS=false hugo --environment test -D --destination "$d/out" >/dev/null 2>&1); then
+  if grep -qE '/(tools|skills|tools-and-skills)/' "$d/out/sitemap.xml"; then bad "with the switch off, the redirecting pages are not in the sitemap"; else ok "with the switch off, the redirecting pages are not in the sitemap"; fi
+  grep -q '<loc>https://davidgriesel.com/projects/</loc>' "$d/out/sitemap.xml" && ok "the sitemap still lists the real pages" || bad "the sitemap still lists the real pages"
+else bad "build with the switch off succeeds"; fi
+echo "Icons"
+for f in favicon.ico favicon-32.png icon-192.png apple-touch-icon.png; do [ -f "$site/$f" ] && ok "$f is served" || bad "$f is served"; done
+grep -q 'rel=apple-touch-icon\|rel="apple-touch-icon"' "$site/index.html" && ok "the page names its icons" || bad "the page names its icons"
 d="$(copy_site no-samples)"
 sed -i.bak 's/allowSamples = true/allowSamples = false/' "$d/hugo.toml"
 expect_fail "the build stops when samples are not allowed" "$d" 'Sample content is still present'

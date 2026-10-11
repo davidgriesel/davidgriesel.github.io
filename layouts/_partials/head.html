@@ -5,7 +5,10 @@
 {{ $desc := .Params.description | default .Params.hook | default site.Params.description }}
 <meta name="description" content="{{ $desc | plainify | truncate 160 }}">
 <link rel="canonical" href="{{ .Permalink }}">
-<link rel="icon" href="data:,">
+<link rel="icon" href="{{ "/favicon.ico" | relURL }}" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ "/favicon-32.png" | relURL }}">
+<link rel="icon" type="image/png" sizes="192x192" href="{{ "/icon-192.png" | relURL }}">
+<link rel="apple-touch-icon" href="{{ "/apple-touch-icon.png" | relURL }}">
 {{ if .Params.sample }}<meta name="robots" content="noindex">{{ end }}
 {{ if and (not site.Params.showToolsAndSkills) (or (eq .Layout "toolsskills") (eq .Kind "taxonomy")) }}<meta http-equiv="refresh" content="0; url={{ "/projects/" | relLangURL }}"><meta name="robots" content="noindex">{{ end }}
 <link rel="preload" href="{{ "/fonts/playfair-display-latin-wght-normal.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>

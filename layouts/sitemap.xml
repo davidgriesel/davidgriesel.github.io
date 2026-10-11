@@ -1,0 +1,14 @@
+{{- /* The sitemap lists the pages a visitor can use. It leaves out pages marked sitemap: disable (the samples) and, when the tools and skills switch is off, the tool and skill pages, which redirect or are not linked. */ -}}
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {{- range .Data.Pages }}
+    {{- $skip := .Sitemap.Disable }}
+    {{- if and (not site.Params.showToolsAndSkills) (or (eq .Kind "taxonomy") (eq .Kind "term") (eq .Layout "toolsskills")) }}{{ $skip = true }}{{ end }}
+    {{- if not $skip }}
+  <url>
+    <loc>{{ .Permalink }}</loc>{{ if not .Lastmod.IsZero }}
+    <lastmod>{{ safeHTML (.Lastmod.Format "2006-01-02T15:04:05-07:00") }}</lastmod>{{ end }}
+  </url>
+    {{- end }}
+  {{- end }}
+</urlset>

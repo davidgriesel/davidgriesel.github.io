@@ -110,3 +110,9 @@ The provider's name, address, email and telephone number are not stored in the r
 `content/projects/project-*` and `content/case-studies/case-study-*` are samples for testing the navigation and the pages. They are labelled "Sample", kept out of search engines and the sitemap, and marked `sample: true`. Before launch, delete them and set `allowSamples = false` in `hugo.toml`; the build then stops if any sample remains.
 
 `tests/fixtures/content/` holds draft entries and case studies that exercise every field. The tests copy them into a throwaway copy of the site, so they are not part of the site and survive the removal of the samples.
+
+## Sitemap, robots file and icons
+
+- **`/sitemap.xml`** is built from `layouts/sitemap.xml`. It lists the pages a visitor can use, and leaves out pages marked `sitemap: disable` in their front matter (the samples) and, while `showToolsAndSkills` is false, the tool and skill pages.
+- **`/robots.txt`** is built from `layouts/robots.txt` and names the sitemap.
+- **Icons:** `static/favicon.ico`, `favicon-32.png`, `icon-192.png` and `apple-touch-icon.png` are a "DG" monogram. To change it, render a new image at 512 px, reduce it to those sizes, and replace the files; a browser may keep showing an old icon for a while from its own cache.
